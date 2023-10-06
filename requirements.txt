@@ -1,0 +1,10 @@
+streamlit
+base64
+pandas
+matplotlib.pyplot
+streamlit_extras
+pickle
+numpy
+sklearn
+streamlit.components.v1
+plotly.express
