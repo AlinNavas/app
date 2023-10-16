@@ -23,7 +23,6 @@ with model_training:
     st.markdown("<h4 style='text-align: center; color: black;'>Please answer the following questions:</h4>", unsafe_allow_html=True)
 
     
-    Age = st.text_input("Enter your Age ","Type Here")
     Polyuria = st.selectbox('Have you experienced an increase in the frequency and duration of voiding of urine? ( greater than 7 times per day)',['Yes','No'])
     Polydipsia= st.selectbox('Have you experienced persistent and unexplained thirst, regardless of how much water/ fluids you drink?',['Yes','No'])
     sudden_weight_loss = st.selectbox('Have you undergone a 3-5 kg weight loss within 6 months, without changing your diet or exercise routine? ',['Yes','No'])
@@ -48,11 +47,11 @@ partial_paresis = 1 if Irritability == "Yes" else 0
 muscle_stiffness = 1 if Irritability == "Yes" else 0
 Obesity = 1 if Irritability == "Yes" else 0
 
-modelsvm = pickle.load(open('demo_svm_model.pkl','rb'))
-modellr = pickle.load(open('demo_lr_model.pkl','rb'))
+modelsvm = pickle.load(open('svc_models.pkl','rb'))
+modellr = pickle.load(open('lr_models.pkl','rb'))
 
-def pred_diab( Age,Polyuria,Polydipsia,sudden_weight_loss,weakness,Polyphagia,Genital_thrush,visual_blurring,Irritability,partial_paresis,muscle_stiffness,Obesity):
-    input=np.array([[Age,Polyuria,Polydipsia,sudden_weight_loss,weakness,Polyphagia,Genital_thrush,visual_blurring,Irritability,partial_paresis,muscle_stiffness,Obesity]]).astype(np.float64)
+def pred_diab( Polyuria,Polydipsia,sudden_weight_loss,weakness,Polyphagia,Genital_thrush,visual_blurring,Irritability,partial_paresis,muscle_stiffness,Obesity):
+    input=np.array([[Polyuria,Polydipsia,sudden_weight_loss,weakness,Polyphagia,Genital_thrush,visual_blurring,Irritability,partial_paresis,muscle_stiffness,Obesity]]).astype(np.float64)
     prediction1 =modelsvm.predict(input)
     prediction2 =modellr.predict_proba(input)
     return (prediction1,prediction2)
@@ -63,7 +62,7 @@ col1, col2, col3 = st.columns(3)
 
 with col2:
     if st.button("Predict diabetes"):
-        output1,output2 = pred_diab(Age,Polyuria,Polydipsia,sudden_weight_loss,weakness,Polyphagia,Genital_thrush,visual_blurring,Irritability,partial_paresis,muscle_stiffness,Obesity)
+        output1,output2 = pred_diab(Polyuria,Polydipsia,sudden_weight_loss,weakness,Polyphagia,Genital_thrush,visual_blurring,Irritability,partial_paresis,muscle_stiffness,Obesity)
         if output1 == 1:
              outputp = "Diabetic"
         else:
