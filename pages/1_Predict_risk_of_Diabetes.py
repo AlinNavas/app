@@ -80,3 +80,9 @@ with col2:
 
 if prev_diab:
     switch_page("Prevent_Diabetes")
+
+with col1:
+    exp = st.button("I would like to learn more about how this ML algorithm works.")
+
+if exp:
+    switch_page("Explainability_of_ML_Model")
