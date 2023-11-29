@@ -43,7 +43,24 @@ with open("trial_files/svm2.png", "rb") as f:
     )
 
     st.markdown(' The SVM model was chosen after comparing multiple machine learning models including Decision Trees, Logistic Regression, K Nearest Neighbors and comparing their classification metrics.')
+st.markdown(' ')
+st.markdown(' ')
+st.markdown(' ')
+st.markdown('The Shapley values for the SVM model are shown below to aid the explainability of the model ')
+with open("trial_files/shap.png", "rb") as f:
+    data = base64.b64encode(f.read()).decode("utf-8")
 
+    st.markdown(
+        f"""
+        <div style="display:table;margin-bottom:0%;margin-left:10%;">
+            <img src="data:image/png;base64,{data}" width="600" height="400">
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+st.markdown(' ')
+st.markdown(' ')
+st.markdown(' The order of features importances listed in the above figure is in accordance with clinical literature.')
 st.markdown(' ')
 st.markdown(' ')
 
